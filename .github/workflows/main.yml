@@ -1,0 +1,44 @@
+name: branch
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: {}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: checkout
+      uses: actions/checkout@v2
+    - name: prepare
+      run: sudo apt-get install -y lcov
+    - name: Cache Flutter dependencies
+      uses: actions/cache@v1
+      with:
+        path: /opt/hostedtoolcache/flutter
+        key: ${{ runner.os }}-flutter
+    - name: setup flutter
+      uses: subosito/flutter-action@v1
+      with:
+        channel: 'stable'
+    - name: setup project
+      run: flutter create .
+    - name: fix
+      run: rm test/widget_test.dart
+    - name: analyze
+      run: flutter analyze
+    - name: test
+      run: |
+        flutter test --coverage
+        lcov -l coverage/lcov.info
+    - name: build web
+      run: flutter build web --base-href "/${{ github.event.repository.name }}/"
+    - name: disable jekyll
+      run: touch build/web/.nojekyll
+    - name: deploy to gh-pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./build/web
+        force_orphan: true
