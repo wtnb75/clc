@@ -51,3 +51,4 @@ web
 pubspec.lock
 analysis_options.yaml
 .metadata
+coverage
