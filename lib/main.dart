@@ -216,10 +216,10 @@ class _MyHomePageState extends State<MyHomePage> {
                       ListTile(
                         title: Row(children: const <Widget>[
                           Icon(Icons.bug_report),
-                          Text("Report issue (TBD)"),
+                          Text("Report issue"),
                         ]),
                         onTap: () {
-                          launch("https://github.com/");
+                          launch("https://github.com/wtnb75/clc/issues/new");
                         },
                       ),
                       ListTile(
