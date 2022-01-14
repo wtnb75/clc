@@ -149,7 +149,9 @@ class FractRpn extends RPN<Fraction> {
 
   String toExpr() {
     exprStack = [];
-    expression.forEach((x) => toExpr1(x));
+    for (var x in expression) {
+      toExpr1(x);
+    }
     return exprStack.last;
   }
 }

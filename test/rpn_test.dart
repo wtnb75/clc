@@ -1,8 +1,7 @@
 import 'package:test/test.dart';
 import 'package:clc/rpn.dart';
-import 'dart:math';
 
-class myRPN extends RPN<int> {
+class MyRPN extends RPN<int> {
   @override
   void exec1(String v) {
     if (RegExp(r"^[0-9]+$").hasMatch(v)) {
@@ -40,7 +39,7 @@ void rpnString() {
   };
   strmaps.forEach((key, value) {
     test("fromString $key", () {
-      var m = myRPN();
+      var m = MyRPN();
       m.fromString(key, " ");
       expect(m.expression, equals(value));
     });
@@ -63,7 +62,7 @@ void infixString() {
 
   strmaps.forEach((key, value) {
     test("fromInfix $key", () {
-      var m = myRPN();
+      var m = MyRPN();
       m.fromInfixString(key, RegExp("[0-9]+"));
       expect(m.expression, equals(value));
     });
@@ -79,7 +78,7 @@ void infixStringFunc() {
 
   strmaps.forEach((key, value) {
     test("fromInfixFunc $key", () {
-      var m = myRPN();
+      var m = MyRPN();
       m.fromInfixString(key, RegExp("[0-9]+"), RegExp("log|sqrt"));
       expect(m.expression, equals(value));
     });
@@ -92,7 +91,7 @@ void rpnEval() {
   };
   strmaps.forEach((key, value) {
     test("evaluate $key", () {
-      var m = myRPN();
+      var m = MyRPN();
       m.fromString(key, " ");
       expect(m.evaluate(), equals(value));
     });
@@ -108,7 +107,7 @@ void infixEval() {
   };
   strmaps.forEach((key, value) {
     test("evaluate $key", () {
-      var m = myRPN();
+      var m = MyRPN();
       m.fromInfixString(key, RegExp("[0-9]+"));
       expect(m.evaluate(), equals(value));
     });

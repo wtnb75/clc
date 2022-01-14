@@ -6,9 +6,9 @@ var _log = Logger(
 );
 
 enum ExprStyle {
-  NormalStyle,
-  TextStyle,
-  DisplayStyle,
+  normalStyle,
+  textStyle,
+  displayStyle,
 }
 
 class Fraction extends Comparable<Fraction> {
@@ -132,12 +132,12 @@ class Fraction extends Comparable<Fraction> {
   }
 
   Map<ExprStyle, String> stylemap = {
-    ExprStyle.NormalStyle: "frac",
-    ExprStyle.TextStyle: "tfrac",
-    ExprStyle.DisplayStyle: "dfrac",
+    ExprStyle.normalStyle: "frac",
+    ExprStyle.textStyle: "tfrac",
+    ExprStyle.displayStyle: "dfrac",
   };
 
-  String toExpr([ExprStyle style = ExprStyle.NormalStyle]) {
+  String toExpr([ExprStyle style = ExprStyle.normalStyle]) {
     fix();
     if (den == BigInt.one) {
       return num.toString();
@@ -147,7 +147,7 @@ class Fraction extends Comparable<Fraction> {
     }
   }
 
-  String toExpr2([ExprStyle style = ExprStyle.NormalStyle]) {
+  String toExpr2([ExprStyle style = ExprStyle.normalStyle]) {
     fix();
     BigInt n1 = num ~/ den;
     BigInt n2 = (num % den).abs();
@@ -165,7 +165,7 @@ class Fraction extends Comparable<Fraction> {
   int compareTo(Fraction other) {
     fix();
     other.fix();
-    print("compareTo: $this $other");
+    _log.d("compareTo: $this $other");
     if (other.num == num && other.den == den) {
       return 0;
     }

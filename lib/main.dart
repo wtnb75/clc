@@ -75,7 +75,7 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  void push_txt(String txt) {
+  void pushTxt(String txt) {
     log.d("push $txt");
     if (txt == "AC") {
       ctrl.text = "";
@@ -131,7 +131,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Expanded(
         flex: flex,
         child: TextButton(
-            onPressed: () => push_txt(txt),
+            onPressed: () => pushTxt(txt),
             child: Text(txt,
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,

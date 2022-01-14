@@ -163,7 +163,9 @@ abstract class RPN<N> {
   void exec1(String v);
 
   N evaluate() {
-    expression.forEach((x) => exec1(x));
+    for (var x in expression) {
+      exec1(x);
+    }
     return stack.last;
   }
 }
