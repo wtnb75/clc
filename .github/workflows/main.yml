@@ -26,7 +26,6 @@ jobs:
       run: flutter create .
     - name: fix
       run: |
-        rm -f test/widget_test.dart
         rm -f web/icons/Icon*.png
     - name: analyze
       run: flutter analyze

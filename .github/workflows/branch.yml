@@ -24,8 +24,6 @@ jobs:
         channel: 'stable'
     - name: setup project
       run: flutter create .
-    - name: fix
-      run: rm test/widget_test.dart
     - name: analyze
       run: flutter analyze
     - name: test
