@@ -82,7 +82,7 @@ abstract class RPN<N> {
         log.d("func: $opnum len=$oplen prio=$prio");
       } else {
         // opcode
-        for (int x = opcodeLength; x != 0; x--) {
+        for (int x = min(opcodeLength, rest.length); x != 0; x--) {
           var op = rest.substring(0, x);
           if (single) {
             op = "S$op";
@@ -152,7 +152,10 @@ abstract class RPN<N> {
     expression = p;
   }
 
-  N pop() {
+  N? pop() {
+    if (stack.isEmpty) {
+      return null;
+    }
     return stack.removeLast();
   }
 
@@ -162,9 +165,12 @@ abstract class RPN<N> {
 
   void exec1(String v);
 
-  N evaluate() {
+  N? evaluate() {
     for (var x in expression) {
       exec1(x);
+    }
+    if (stack.isEmpty) {
+      return null;
     }
     return stack.last;
   }

@@ -3,9 +3,9 @@ import 'package:clc/fract.dart';
 import 'package:clc/rpn.dart';
 
 class FractRpn extends RPN<Fraction> {
-  RegExp numberExp = RegExp(r"[0-9]+(\.[0-9]+)?(e[\+\-])?[0-9]*");
-  RegExp funcExp = RegExp(r"[a-zA-Z][a-zA-Z0-9]*");
-  Map<String, Fraction> constants = {
+  static RegExp numberExp = RegExp(r"[0-9]+(\.[0-9]+)?(e[\+\-])?[0-9]*");
+  static RegExp funcExp = RegExp(r"[a-zA-Z][a-zA-Z0-9]*");
+  static Map<String, Fraction> constants = {
     "pi": Fraction.fromDouble(pi),
     "e": Fraction.fromDouble(e),
   };
@@ -27,6 +27,10 @@ class FractRpn extends RPN<Fraction> {
       push(Fraction.fromString(v));
     } else if (ary1.contains(v)) {
       var a = pop();
+      if (a == null) {
+        log.e("pop null(1)");
+        return;
+      }
       if (v == "S-") {
         push(-a);
       } else if (v == "S+") {
@@ -52,7 +56,15 @@ class FractRpn extends RPN<Fraction> {
       }
     } else if (ary2.contains(v)) {
       var a = pop();
+      if (a == null) {
+        log.e("pop null(a)");
+        return;
+      }
       var b = pop();
+      if (b == null) {
+        log.e("pop null(b)");
+        return;
+      }
       if (v == "+") {
         push(b + a);
       } else if (v == "-") {
@@ -73,7 +85,7 @@ class FractRpn extends RPN<Fraction> {
     }
   }
 
-  Fraction eval(String s) {
+  Fraction? eval(String s) {
     fromInfixString(s, numberExp, funcExp);
     return evaluate();
   }

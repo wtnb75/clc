@@ -62,10 +62,16 @@ class _MyHomePageState extends State<MyHomePage> {
       } else {
         try {
           FractRpn f = FractRpn();
-          _result = f.eval(s);
-          _resultStr = _result.toExpr();
-          _resultStr2 = _result.toExpr2();
-          _exprStr = f.toExpr();
+          var v = f.eval(s);
+          if (v != null) {
+            _result = v;
+            _resultStr = _result.toExpr();
+            _resultStr2 = _result.toExpr2();
+            _exprStr = f.toExpr();
+          } else {
+            _resultStr = "ERR";
+            _resultStr2 = "ERR";
+          }
         } on Exception catch (e) {
           _resultStr = "ERR";
           _resultStr2 = "ERR";

@@ -7,15 +7,15 @@ class MyRPN extends RPN<int> {
     if (RegExp(r"^[0-9]+$").hasMatch(v)) {
       push(int.parse(v));
     } else if (v.startsWith("S")) {
-      var a = pop();
+      var a = pop()!;
       if (v == "S-") {
         push(-a);
       } else if (v == "S+") {
         push(a);
       }
     } else {
-      var a = pop();
-      var b = pop();
+      var a = pop()!;
+      var b = pop()!;
       if (v == "*") {
         push(b * a);
       } else if (v == "+") {
