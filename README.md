@@ -9,4 +9,4 @@ simple calculator app
 ## links
 
 - [app](https://wtnb75.github.io/clc/)
-- [unittest coverage](https://wtnb75.github.io/clc/cover/)
+- [unittest coverage](https://wtnb75.github.io/clc/coverage/)
