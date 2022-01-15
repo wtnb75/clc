@@ -25,7 +25,9 @@ jobs:
     - name: setup project
       run: flutter create .
     - name: fix
-      run: rm test/widget_test.dart
+      run: |
+        rm -f test/widget_test.dart
+        rm -f web/icons/Icon*.png
     - name: analyze
       run: flutter analyze
     - name: test
