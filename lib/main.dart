@@ -185,7 +185,7 @@ class _MyHomePageState extends State<MyHomePage> {
             return Scaffold(
                 extendBody: false,
                 floatingActionButtonLocation:
-                    FloatingActionButtonLocation.centerDocked,
+                    FloatingActionButtonLocation.startDocked,
                 floatingActionButton: FloatingActionButton(
                   onPressed: () {
                     var tabid = DefaultTabController.of(context)?.index;

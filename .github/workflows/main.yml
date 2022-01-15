@@ -25,17 +25,22 @@ jobs:
     - name: setup project
       run: flutter create .
     - name: fix
-      run: rm test/widget_test.dart
+      run: |
+        rm -f test/widget_test.dart
+        rm -f web/icons/Icon*.png
     - name: analyze
       run: flutter analyze
     - name: test
       run: |
         flutter test --coverage
         lcov -l coverage/lcov.info
+        genhtml coverage/lcov.info -o coverage/html
     - name: build web
       run: flutter build web --base-href "/${{ github.event.repository.name }}/"
     - name: disable jekyll
       run: touch build/web/.nojekyll
+    - name: copy coverage output
+      run: cp -r coverage/html/ build/web/coverage/
     - name: deploy to gh-pages
       uses: peaceiris/actions-gh-pages@v3
       with:
