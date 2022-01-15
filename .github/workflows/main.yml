@@ -32,10 +32,13 @@ jobs:
       run: |
         flutter test --coverage
         lcov -l coverage/lcov.info
+        genhtml coverage/lcov.info -o coverage/html
     - name: build web
       run: flutter build web --base-href "/${{ github.event.repository.name }}/"
     - name: disable jekyll
       run: touch build/web/.nojekyll
+    - name: copy coverage output
+      run: cp -r coverage/html/ build/web/coverage/
     - name: deploy to gh-pages
       uses: peaceiris/actions-gh-pages@v3
       with:

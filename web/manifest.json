@@ -1,0 +1,36 @@
+{
+    "name": "Simple Calculator",
+    "short_name": "clc",
+    "start_url": ".",
+    "scope": ".",
+    "display": "standalone",
+    "background_color": "#fff",
+    "theme_color": "#0175C2",
+    "description": "Simple Calculator",
+    "orientation": "portrait-primary",
+    "prefer_related_applications": false,
+    "icons": [
+        {
+            "src": "icons/clc-192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "icons/clc-400.png",
+            "sizes": "400x400",
+            "type": "image/png"
+        },
+        {
+            "src": "icons/clc-maskable-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "maskable"
+        },
+        {
+            "src": "icons/clc-maskable-400.png",
+            "sizes": "400x400",
+            "type": "image/png",
+            "purpose": "maskable"
+        }
+    ]
+}
