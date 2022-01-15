@@ -16,8 +16,8 @@
             "type": "image/png"
         },
         {
-            "src": "icons/clc-400.png",
-            "sizes": "400x400",
+            "src": "icons/clc-512.png",
+            "sizes": "512x512",
             "type": "image/png"
         },
         {
@@ -27,8 +27,8 @@
             "purpose": "maskable"
         },
         {
-            "src": "icons/clc-maskable-400.png",
-            "sizes": "400x400",
+            "src": "icons/clc-maskable-512.png",
+            "sizes": "512x512",
             "type": "image/png",
             "purpose": "maskable"
         }
