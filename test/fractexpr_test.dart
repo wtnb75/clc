@@ -1,5 +1,4 @@
 import 'package:test/test.dart';
-import 'package:clc/fract.dart';
 import 'package:clc/fractexpr.dart';
 
 void main() {
