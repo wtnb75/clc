@@ -5,6 +5,8 @@ import 'package:flutter_math_fork/flutter_math.dart';
 import 'package:clc/fractexpr.dart';
 import 'package:clc/fract.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:package_info_plus/package_info_plus.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 var log = Logger(
   printer: SimplePrinter(printTime: true),
@@ -225,12 +227,38 @@ class _MyHomePageState extends State<MyHomePage> {
                           Text("Report issue"),
                         ]),
                         onTap: () {
-                          launch("https://github.com/wtnb75/clc/issues/new");
+                          launch("https://github.com/wtnb75/clc/issues");
                         },
                       ),
                       ListTile(
-                        title: const Text("other action..."),
-                        onTap: () {},
+                        title: const Text("About..."),
+                        onTap: () {
+                          var packageInfo = PackageInfo.fromPlatform();
+                          packageInfo.then((pkginfo) {
+                            showDialog(
+                                context: context,
+                                builder: (_) {
+                                  String appName = pkginfo.appName;
+                                  String packageName = pkginfo.packageName;
+                                  String version = pkginfo.version;
+                                  String buildId = pkginfo.buildNumber;
+                                  String content = "appName = $appName\n";
+                                  content += "packageName = $packageName\n";
+                                  content += "version = $version\n";
+                                  content += "buildId = $buildId\n";
+                                  return AlertDialog(
+                                      title: Row(children: [
+                                        SvgPicture.asset(
+                                          "assets/clc.svg",
+                                          height: 50,
+                                        ),
+                                        const VerticalDivider(),
+                                        Text("About $appName..."),
+                                      ]),
+                                      content: Text(content));
+                                });
+                          });
+                        },
                       ),
                     ],
                   ),
