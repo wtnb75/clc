@@ -224,10 +224,30 @@ class _MyHomePageState extends State<MyHomePage> {
                       ListTile(
                         title: Row(children: const <Widget>[
                           Icon(Icons.bug_report),
-                          Text("Report issue"),
+                          Text("Report issue 🔗"),
                         ]),
                         onTap: () {
                           launch("https://github.com/wtnb75/clc/issues");
+                        },
+                      ),
+                      ListTile(
+                        title: Row(children: const <Widget>[
+                          Icon(Icons.search),
+                          Text("by google 🔗"),
+                        ]),
+                        onTap: () {
+                          launch("https://google.com/search?q=" +
+                              Uri.encodeComponent(ctrl.text));
+                        },
+                      ),
+                      ListTile(
+                        title: Row(children: const <Widget>[
+                          Icon(Icons.calculate),
+                          Text("by wolfram alpha 🔗"),
+                        ]),
+                        onTap: () {
+                          launch("https://www.wolframalpha.com/input/?i=" +
+                              Uri.encodeComponent(ctrl.text));
                         },
                       ),
                       ListTile(
@@ -276,6 +296,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 body: Container(
                   decoration:
                       BoxDecoration(border: Border.all(color: Colors.blueGrey)),
+                  constraints: const BoxConstraints(minHeight: 100),
                   margin: const EdgeInsets.all(8),
                   child: TabBarView(children: <Widget>[
                     Center(
@@ -325,7 +346,6 @@ class _MyHomePageState extends State<MyHomePage> {
                     const Divider(),
                     buttons(),
                   ]),
-                  // bottomNavigationBar: buttons(),
                 ));
           },
         ));
