@@ -227,7 +227,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           Text("Report issue 🔗"),
                         ]),
                         onTap: () {
-                          launch("https://github.com/wtnb75/clc/issues");
+                          launchUrl(Uri.parse("https://github.com/wtnb75/clc/issues"));
                         },
                       ),
                       ListTile(
@@ -236,8 +236,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           Text("by google 🔗"),
                         ]),
                         onTap: () {
-                          launch("https://google.com/search?q=" +
-                              Uri.encodeComponent(ctrl.text));
+                          launchUrl(Uri.parse("https://google.com/search").replace(queryParameters: {"q": ctrl.text}));
                         },
                       ),
                       ListTile(
@@ -246,8 +245,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           Text("by wolfram alpha 🔗"),
                         ]),
                         onTap: () {
-                          launch("https://www.wolframalpha.com/input/?i=" +
-                              Uri.encodeComponent(ctrl.text));
+                          launchUrl(Uri.parse("https://www.wolframalpha.com/input/").replace(queryParameters: {"i": ctrl.text}));
                         },
                       ),
                       ListTile(
