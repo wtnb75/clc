@@ -143,7 +143,7 @@ class _MyHomePageState extends State<MyHomePage> {
             child: Text(txt,
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
-                  // fontSize: 25,
+                  fontSize: 25,
                 )),
             style: ButtonStyle(
               foregroundColor: MaterialStateProperty.all<Color>(fgcolor),
