@@ -140,15 +140,16 @@ class _MyHomePageState extends State<MyHomePage> {
         flex: flex,
         child: TextButton(
             onPressed: () => pushTxt(txt),
+            style: ButtonStyle(
+              foregroundColor: MaterialStateProperty.all<Color>(fgcolor),
+              backgroundColor: MaterialStateProperty.all<Color>(bgcolor),
+            ),
             child: Text(txt,
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 25,
                 )),
-            style: ButtonStyle(
-              foregroundColor: MaterialStateProperty.all<Color>(fgcolor),
-              backgroundColor: MaterialStateProperty.all<Color>(bgcolor),
-            )));
+            ));
   }
 
   Widget buttons() {
@@ -196,7 +197,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     FloatingActionButtonLocation.startDocked,
                 floatingActionButton: FloatingActionButton(
                   onPressed: () {
-                    var tabid = DefaultTabController.of(context)?.index;
+                    var tabid = DefaultTabController.of(context).index;
                     String copyText = "";
                     if (tabid == 1) {
                       copyText = _result.toString2();
@@ -210,19 +211,19 @@ class _MyHomePageState extends State<MyHomePage> {
                     log.d("copy$tabid: $copyText");
                     Clipboard.setData(ClipboardData(text: copyText));
                   },
-                  child: const Icon(Icons.copy),
                   tooltip: "copy",
+                  child: const Icon(Icons.copy),
                 ),
                 drawer: Drawer(
                   child: ListView(
                     children: <Widget>[
                       DrawerHeader(
+                        decoration: const BoxDecoration(color: Colors.blue),
                         child: Text(widget.title,
                             style: const TextStyle(color: Colors.white)),
-                        decoration: const BoxDecoration(color: Colors.blue),
                       ),
                       ListTile(
-                        title: Row(children: const <Widget>[
+                        title: const Row(children: <Widget>[
                           Icon(Icons.bug_report),
                           Text("Report issue 🔗"),
                         ]),
@@ -231,7 +232,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         },
                       ),
                       ListTile(
-                        title: Row(children: const <Widget>[
+                        title: const Row(children: <Widget>[
                           Icon(Icons.search),
                           Text("by google 🔗"),
                         ]),
@@ -240,7 +241,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         },
                       ),
                       ListTile(
-                        title: Row(children: const <Widget>[
+                        title: const Row(children: <Widget>[
                           Icon(Icons.calculate),
                           Text("by wolfram alpha 🔗"),
                         ]),
