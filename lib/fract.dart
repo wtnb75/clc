@@ -66,7 +66,7 @@ class Fraction extends Comparable<Fraction> {
     }
     var n1 = BigInt.parse(s.substring(0, idx) + s.substring(idx + 1));
     var l = (s.length - idx) - 1;
-    var n2 = BigInt.parse("1" + "0" * l);
+    var n2 = BigInt.parse('1${"0"*l}');
     var ret = Fraction(n1, n2);
     ret.fix();
     return ret;
