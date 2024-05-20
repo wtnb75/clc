@@ -2,11 +2,14 @@ name: main
 
 on:
   push:
-    branches: [main]
+    branches: [main, test-deploy]
   workflow_dispatch: {}
+
 
 jobs:
   build:
+    permissions:
+      id-token: write
     runs-on: ubuntu-latest
     steps:
     - name: checkout
@@ -46,10 +49,23 @@ jobs:
       run: touch build/web/.nojekyll
     - name: copy coverage output
       run: cp -r coverage/html/ build/web/coverage/
+    - name: setup pages
+      uses: actions/configure-pages@v3
     - name: upload pages artifact
-      uses: actions/upload-pages-artifact@v1
+      uses: actions/upload-pages-artifact@v2
       with:
         path: build/web
+  deploy:
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    runs-on: ubuntu-latest
+    needs: build
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
     - name: deploy to gh-pages
       uses: actions/deploy-pages@v2
       id: deployment
