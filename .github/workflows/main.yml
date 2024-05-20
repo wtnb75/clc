@@ -32,7 +32,13 @@ jobs:
     - name: test
       run: |
         flutter test --coverage
-        lcov -l coverage/lcov.info
+        (
+          echo "# Coverage report"
+          echo ""
+          echo '```'
+          lcov -l coverage/lcov.info
+          echo '```'
+        ) >> $GITHUB_STEP_SUMMARY
         genhtml coverage/lcov.info -o coverage/html
     - name: build web
       run: flutter build web --wasm --base-href "/${{ github.event.repository.name }}/" --no-tree-shake-icons
