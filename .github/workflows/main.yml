@@ -50,9 +50,9 @@ jobs:
     - name: copy coverage output
       run: cp -r coverage/html/ build/web/coverage/
     - name: setup pages
-      uses: actions/configure-pages@v3
+      uses: actions/configure-pages@v5
     - name: upload pages artifact
-      uses: actions/upload-pages-artifact@v2
+      uses: actions/upload-pages-artifact@v3
       with:
         path: build/web
   deploy:
@@ -67,5 +67,5 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
     - name: deploy to gh-pages
-      uses: actions/deploy-pages@v2
+      uses: actions/deploy-pages@v4
       id: deployment
