@@ -17,7 +17,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
+  const MyHomePage({super.key, required this.title});
 
   final String title;
 
@@ -141,8 +141,8 @@ class _MyHomePageState extends State<MyHomePage> {
         child: TextButton(
             onPressed: () => pushTxt(txt),
             style: ButtonStyle(
-              foregroundColor: MaterialStateProperty.all<Color>(fgcolor),
-              backgroundColor: MaterialStateProperty.all<Color>(bgcolor),
+              foregroundColor: WidgetStateProperty.all<Color>(fgcolor),
+              backgroundColor: WidgetStateProperty.all<Color>(bgcolor),
             ),
             child: Text(txt,
                 style: const TextStyle(

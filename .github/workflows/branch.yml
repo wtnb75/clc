@@ -10,11 +10,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
     - name: prepare
       run: sudo apt-get install -y lcov
     - name: Cache Flutter dependencies
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       with:
         path: /opt/hostedtoolcache/flutter
         key: ${{ runner.os }}-flutter
@@ -31,4 +31,4 @@ jobs:
         flutter test --coverage
         lcov -l coverage/lcov.info
     - name: build web
-      run: flutter build web --base-href "/${{ github.event.repository.name }}/" --no-tree-shake-icons
+      run: flutter build web --wasm --base-href "/${{ github.event.repository.name }}/" --no-tree-shake-icons
