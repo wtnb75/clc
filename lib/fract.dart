@@ -11,7 +11,14 @@ enum ExprStyle {
   displayStyle,
 }
 
-class Fraction extends Comparable<Fraction> {
+extension Compare<T> on Comparable<T> {
+  bool operator <=(T other) => compareTo(other) <= 0;
+  bool operator >=(T other) => compareTo(other) >= 0;
+  bool operator <(T other) => compareTo(other) < 0;
+  bool operator >(T other) => compareTo(other) > 0;
+}
+
+class Fraction implements Comparable<Fraction> {
   BigInt num, den;
   Fraction(this.num, this.den);
 

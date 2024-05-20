@@ -10,11 +10,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
     - name: prepare
       run: sudo apt-get install -y lcov
     - name: Cache Flutter dependencies
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       with:
         path: /opt/hostedtoolcache/flutter
         key: ${{ runner.os }}-flutter
@@ -35,14 +35,15 @@ jobs:
         lcov -l coverage/lcov.info
         genhtml coverage/lcov.info -o coverage/html
     - name: build web
-      run: flutter build web --base-href "/${{ github.event.repository.name }}/" --no-tree-shake-icons
+      run: flutter build web --wasm --base-href "/${{ github.event.repository.name }}/" --no-tree-shake-icons
     - name: disable jekyll
       run: touch build/web/.nojekyll
     - name: copy coverage output
       run: cp -r coverage/html/ build/web/coverage/
+    - name: upload pages artifact
+      uses: actions/upload-pages-artifact@v1
+        with:
+          path: build/web
     - name: deploy to gh-pages
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./build/web
-        force_orphan: true
+      uses: actions/deploy-pages@v2
+      id: deployment
