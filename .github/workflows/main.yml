@@ -32,7 +32,13 @@ jobs:
     - name: test
       run: |
         flutter test --coverage
-        lcov -l coverage/lcov.info
+        (
+          echo "# Coverage report"
+          echo ""
+          echo '```'
+          lcov -l coverage/lcov.info
+          echo '```'
+        ) >> $GITHUB_STEP_SUMMARY
         genhtml coverage/lcov.info -o coverage/html
     - name: build web
       run: flutter build web --wasm --base-href "/${{ github.event.repository.name }}/" --no-tree-shake-icons
@@ -42,8 +48,8 @@ jobs:
       run: cp -r coverage/html/ build/web/coverage/
     - name: upload pages artifact
       uses: actions/upload-pages-artifact@v1
-        with:
-          path: build/web
+      with:
+        path: build/web
     - name: deploy to gh-pages
       uses: actions/deploy-pages@v2
       id: deployment
