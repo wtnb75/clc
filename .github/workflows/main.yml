@@ -42,8 +42,8 @@ jobs:
       run: cp -r coverage/html/ build/web/coverage/
     - name: upload pages artifact
       uses: actions/upload-pages-artifact@v1
-        with:
-          path: build/web
+      with:
+        path: build/web
     - name: deploy to gh-pages
       uses: actions/deploy-pages@v2
       id: deployment
