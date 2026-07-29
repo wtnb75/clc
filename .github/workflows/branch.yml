@@ -1,3 +1,4 @@
+# .github/workflows/branch.yml
 name: branch
 
 on:
@@ -5,36 +6,19 @@ on:
     branches-ignore: [gh-pages, main]
   workflow_dispatch: {}
 
+permissions:
+  contents: read
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - name: checkout
-      uses: actions/checkout@v4
-    - name: prepare
-      run: sudo apt-get install -y lcov
-    - name: Cache Flutter dependencies
-      uses: actions/cache@v4
+    - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+    - uses: wtnb75/actions/flutter@v1
+    - uses: wtnb75/actions/fluttertest@v1
+    - name: cleanup default icons
+      run: rm -f web/icons/Icon*.png
+      shell: bash
+    - uses: wtnb75/actions/flutterbuild@v1
       with:
-        path: /opt/hostedtoolcache/flutter
-        key: ${{ runner.os }}-flutter
-    - name: setup flutter
-      uses: subosito/flutter-action@v2
-      with:
-        channel: 'stable'
-    - name: setup project
-      run: flutter create .
-    - name: analyze
-      run: flutter analyze
-    - name: test
-      run: |
-        flutter test --coverage
-        (
-          echo "# Coverage report"
-          echo ""
-          echo '```'
-          lcov -l coverage/lcov.info
-          echo '```'
-        ) >> $GITHUB_STEP_SUMMARY
-    - name: build web
-      run: flutter build web --wasm --base-href "/${{ github.event.repository.name }}/" --no-tree-shake-icons
+        base-href: "/${{ github.event.repository.name }}/"
