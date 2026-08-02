@@ -253,7 +253,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         title: const Text("About..."),
                         onTap: () async {
                           var pkginfo = await PackageInfo.fromPlatform();
-                          if (!mounted) return;
+                          if (!context.mounted) return;
                           showDialog(
                               context: context,
                               builder: (_) {
