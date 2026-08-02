@@ -254,6 +254,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         onTap: () {
                           var packageInfo = PackageInfo.fromPlatform();
                           packageInfo.then((pkginfo) {
+                            if (!mounted) return;
                             showDialog(
                                 context: context,
                                 builder: (_) {
